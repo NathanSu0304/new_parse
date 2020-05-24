@@ -401,107 +401,107 @@ public class SAXParserExample extends DefaultHandler {
         }
         assert conn != null;
 
-//        String max_id = "";
-//        Statement statement = conn.createStatement();
-//
-//        String query = "select max(id) as id from stars";
-//        ResultSet rs = statement.executeQuery(query);
-//        if(rs.next()){
-//            max_id =  rs.getString("id");
-//        }
-//        actor_id = Long.parseLong(max_id.substring(2));
-//
-//
-//        Statement state = conn.createStatement();
-//        String query1 = "select name,birthYear from stars";
-//        ResultSet rs1 = state.executeQuery(query1);
-//        while(rs1.next()){
-//            BaseActor actor = new BaseActor();
-//            actor.setName(rs1.getString("name"));
-//            actor.setDob(rs1.getString("birthYear"));
-//            Actor_filter.add(actor);
-//        }
-//
-//        SAXParserExample spe = new SAXParserExample();
-//        spe.runExample();
-//
-//        Iterator<BaseActor> it = store_mv.iterator();
-//        while (it.hasNext()) {
-//            BaseActor i = it.next();
-//            if(!Actor_filter.contains(i)){
-//                writeFile(i.getName(),i.getDob());
-//            }
-//        }
-//
-//        batchInsert("actor.txt");
+       String max_id = "";
+       Statement statement = conn.createStatement();
+
+       String query = "select max(id) as id from stars";
+       ResultSet rs = statement.executeQuery(query);
+       if(rs.next()){
+           max_id =  rs.getString("id");
+       }
+       actor_id = Long.parseLong(max_id.substring(2));
+
+
+       Statement state = conn.createStatement();
+       String query1 = "select name,birthYear from stars";
+       ResultSet rs1 = state.executeQuery(query1);
+       while(rs1.next()){
+           BaseActor actor = new BaseActor();
+           actor.setName(rs1.getString("name"));
+           actor.setDob(rs1.getString("birthYear"));
+           Actor_filter.add(actor);
+       }
+
+       SAXParserExample spe = new SAXParserExample();
+       spe.runExample();
+
+       Iterator<BaseActor> it = store_mv.iterator();
+       while (it.hasNext()) {
+           BaseActor i = it.next();
+           if(!Actor_filter.contains(i)){
+               writeFile(i.getName(),i.getDob());
+           }
+       }
+
+       batchInsert("actor.txt");
 //
 ////======================================
 //
-//        ArrayList<String> all_gen = new ArrayList<String>();
-//        String query2 = "select name from genres";
-//        Statement my_statement = conn.createStatement();
-//        ResultSet rs3 = my_statement.executeQuery(query2);
-//
-//        while(rs3.next()){
-//            all_gen.add(rs3.getString("name"));
-//        }
-//        int all_gen_size = all_gen.size();
-//
-//
-//        Statement state1 = conn.createStatement();
-//        String query3 = "select title, year, director from movies";
-//        ResultSet rs2 = state1.executeQuery(query3);
-//        while(rs2.next()){
-//            BaseMv mv = new BaseMv();
-//            mv.setTitle(rs2.getString("title"));
-//            mv.setYear(rs2.getInt("year"));
-//            mv.setDirectorName(rs2.getString("director"));
-//            Mv_filter.add(mv);
-//        }
-//
-//        Statement statement5 = conn.createStatement();
-//        String query_mv_id = "select max(id) as id from movies";
-//        ResultSet rs_mv_id = statement5.executeQuery(query_mv_id);
-//        if(rs_mv_id.next()){
-//            max_id =  rs_mv_id.getString("id");
-//        }
-//
-//        film_id = Long.parseLong(max_id.substring(2));
-//
-//        ParseMovie parseMovie = new ParseMovie();
-//        parseMovie.runExample();
-//        Iterator<BaseMv> it1 = parseMovie.store_mv.iterator();
-//
-//
-//        while (it1.hasNext()) {
-//            BaseMv i = it1.next();
-//            BaseMv i2 = new BaseMv();
-//            i2.setDirectorName(i.getDirectorName());
-//            i2.setYear(i.getYear());
-//            i2.setTitle(i.getTitle());
-//            List<String> gen_list = i.getGenre();
-//
-//            if(!Mv_filter.contains(i2)){
-//                writeMovieFile((++film_id), i.getTitle(),i.getYear(),i.getDirectorName());
-//
-//                Iterator<String> each_gen = gen_list.iterator();
-//                while(each_gen.hasNext()){
-//                    String each_gen_str = each_gen.next();
-//
-//                    if(all_gen.contains(each_gen_str)){
-//                        writeGIMFile(film_id, (all_gen.indexOf(each_gen_str)+1));
-//                    }
-//                    else{
-//                        all_gen.add(each_gen_str);
-//                        writeGenreFile((++all_gen_size),each_gen_str);
-//                        writeGIMFile(film_id, all_gen_size);
-//
-//                    }
-//                }
-//            }
-//        }
-//        batchInsert("movie.txt");
-//        batchInsert("genre.txt");
+       ArrayList<String> all_gen = new ArrayList<String>();
+       String query2 = "select name from genres";
+       Statement my_statement = conn.createStatement();
+       ResultSet rs3 = my_statement.executeQuery(query2);
+
+       while(rs3.next()){
+           all_gen.add(rs3.getString("name"));
+       }
+       int all_gen_size = all_gen.size();
+
+
+       Statement state1 = conn.createStatement();
+       String query3 = "select title, year, director from movies";
+       ResultSet rs2 = state1.executeQuery(query3);
+       while(rs2.next()){
+           BaseMv mv = new BaseMv();
+           mv.setTitle(rs2.getString("title"));
+           mv.setYear(rs2.getInt("year"));
+           mv.setDirectorName(rs2.getString("director"));
+           Mv_filter.add(mv);
+       }
+
+       Statement statement5 = conn.createStatement();
+       String query_mv_id = "select max(id) as id from movies";
+       ResultSet rs_mv_id = statement5.executeQuery(query_mv_id);
+       if(rs_mv_id.next()){
+           max_id =  rs_mv_id.getString("id");
+       }
+
+       film_id = Long.parseLong(max_id.substring(2));
+
+       ParseMovie parseMovie = new ParseMovie();
+       parseMovie.runExample();
+       Iterator<BaseMv> it1 = parseMovie.store_mv.iterator();
+
+
+       while (it1.hasNext()) {
+           BaseMv i = it1.next();
+           BaseMv i2 = new BaseMv();
+           i2.setDirectorName(i.getDirectorName());
+           i2.setYear(i.getYear());
+           i2.setTitle(i.getTitle());
+           List<String> gen_list = i.getGenre();
+
+           if(!Mv_filter.contains(i2)){
+               writeMovieFile((++film_id), i.getTitle(),i.getYear(),i.getDirectorName());
+
+               Iterator<String> each_gen = gen_list.iterator();
+               while(each_gen.hasNext()){
+                   String each_gen_str = each_gen.next();
+
+                   if(all_gen.contains(each_gen_str)){
+                       writeGIMFile(film_id, (all_gen.indexOf(each_gen_str)+1));
+                   }
+                   else{
+                       all_gen.add(each_gen_str);
+                       writeGenreFile((++all_gen_size),each_gen_str);
+                       writeGIMFile(film_id, all_gen_size);
+
+                   }
+               }
+           }
+       }
+       batchInsert("movie.txt");
+       batchInsert("genre.txt");
         batchInsert("gim.txt");
 
 
